@@ -1,25 +1,3 @@
 #!/bin/bash
 
-# Setting the flag to exit on error
-
-# Without this, for example, when we didn't run Docker daemon
-# the script will still continue to execute despite of the error.
-set -e
-
-# Get App info (which is copied from Distillery documentation)
-APP_NAME="$(grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')"
-APP_VSN="$(grep 'version:' mix.exs | cut -d '"' -f2)"
-TAR_FILENAME=${APP_NAME}-${APP_VSN}.tar.gz
-
-# Build image
-docker build -t ${APP_NAME} .
-
-# Extract release files
-id=$(docker create ${APP_NAME})
-docker cp $id:/app/${APP_NAME} ./rel
-docker rm $id
-
-# tar it
-mkdir -v ./dist
-tar -cvf ./dist/${APP_NAME}-${APP_VSN}.tar.gz ./rel/
-rm -rf ./rel
+MIX_ENV=prod DB_PATH=/home/pi/weather_data.db mix do compile, release
