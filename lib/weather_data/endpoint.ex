@@ -27,7 +27,6 @@ defmodule WeatherData.Endpoint do
 
   get _ do
     events = Events.get_last_events(10)
-    IO.inspect events, label: "E V E N T S"
     render(conn, "index.html", [events: events])
   end
 
