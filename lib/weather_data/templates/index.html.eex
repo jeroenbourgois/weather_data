@@ -1,0 +1,95 @@
+<!doctype>
+<html>
+  <head>
+<style>
+* {
+  font-family: "Inconsolata", Menlo, Chicago, monospace;
+  box-sizing: border-box;
+}
+
+html {
+  background: blue;
+  color: white;
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 12px;
+  padding-top: 20px;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  color: #000;
+}
+
+td, th {
+  font-size: 11px;
+}
+td {
+  margin: 2pt;
+  background: yellow;
+}
+tr { border: .4pt }
+table { border: thick solid }
+thead { border: 14pt double(1,12,1) }
+thead { background: cyan }
+tr:odd { background: yellow }
+tr:even { background: cyan }
+
+</style>
+  </head>
+  <body>
+    <h1>Weather Data</h1>
+    <h4>Last entries</h4>
+    
+    <%= if events == [] do %>
+      No events yet...
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>baromin</th>
+            <th>uv</th>
+            <th>dewptf</th>
+            <th>humidity</th>
+            <th>humidity in</th>
+            <th>tempf in</th>
+            <th>rcpc</th>
+            <th>rtfreq</th>
+            <th>solarradiation</th>
+            <th>tempf</th>
+            <th>winddir</th>
+            <th>windgustmph</th>
+            <th>windspeedmph</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= for event <- events do %>
+          <tr>
+            <td><%= event.id %></td>
+            <td><%= event.baromin %></td>
+            <td><%= event.uv %></td>
+            <td><%= event.dewptf %></td>
+            <td><%= event.humidity %></td>
+            <td><%= event.indoorhumidity %></td>
+            <td><%= event.indoortempf %></td>
+            <td><%= event.rainin %></td>
+            <td><%= event.rtfreq %></td>
+            <td><%= event.solarradiation %></td>
+            <td><%= event.tempf %></td>
+            <td><%= event.winddir %></td>
+            <td><%= event.windgustmph %></td>
+            <td><%= event.windspeedmph %></td>
+            <td style="white-space: nowrap"><%= event.inserted_at %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </body>
+</html>

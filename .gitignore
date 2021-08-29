@@ -9,5 +9,5 @@ erl_crash.dump
 /config/*.secret.exs
 .elixir_ls/
 /dist
-database.db
-database.db*
+weather_data.db
+weather_data.db*

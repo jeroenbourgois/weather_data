@@ -5,4 +5,5 @@ time=$(printf '%(%H-%M-%S)T%s' -1)
 backup_name="${DB_NAME}-${date}-${time}.db"
 
 sqlite3 "main" ".backup ${backup_name}" 
-aws s3 cp /home/pi/weather_data.db  s3://${backup_name}         
+echo $backup_name
+# aws s3 cp /home/pi/weather_data.db  s3://${backup_name}         

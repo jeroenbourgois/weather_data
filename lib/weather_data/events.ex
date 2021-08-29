@@ -1,4 +1,5 @@
 defmodule WeatherData.Events do
+  import Ecto.Query, warn: false
 
   alias WeatherData.Event
   alias WeatherData.Repo
@@ -18,4 +19,11 @@ defmodule WeatherData.Events do
   end
 
   defp cleanup_uv(payload), do: payload
+
+  def get_last_events(count) do
+    Event
+    |> order_by(desc: :id)
+    |> limit(^count)
+    |> Repo.all()
+  end
 end
