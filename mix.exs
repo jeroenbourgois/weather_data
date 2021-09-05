@@ -25,7 +25,8 @@ defmodule WeatherData.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.0"},
       {:ecto_sql, "~> 3.0"},
-      {:ecto_sqlite3, "~> 0.7.0"}
+      {:ecto_sqlite3, "~> 0.7.0"},
+      {:logger_file_backend, "~> 0.0.10"}
     ]
   end
 end
