@@ -6,7 +6,7 @@ config :logger,
   backends: [{LoggerFileBackend, :file}]
 
 config :logger, :file,
-  path: "log/weather_data.log",
+  path: "/var/log/weather_data.log",
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id],
   level: :debug
