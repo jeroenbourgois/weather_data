@@ -1,10 +1,10 @@
 # WeatherData
 
-**TODO: Add description**
+To be able run the release, an environment variable `DB_PATH` needs to be set
+and should point to a SQLite db file.
 
-
-ENV
+For example:
 
 ```
-DB_PATH
+DB_PATH=/home/pi/weather_data.db sudo /opt/app/weather_data/_build/prod/rel/weather_data/bin/weather_data start
 ```

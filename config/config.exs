@@ -6,6 +6,6 @@ config :weather_data,
   ecto_repos: [WeatherData.Repo]
 
 config :weather_data, WeatherData.Repo,
-  database: System.get_env("DB_NAME") || "weather_data.db"
+  database: System.fetch_env!("DB_NAME")
 
 import_config "#{Mix.env()}.exs"

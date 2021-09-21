@@ -3,7 +3,7 @@ use Mix.Config
 config :weather_data, port: 80
 
 config :logger,
-  backends: [{LoggerFileBackend, :file}]
+  backends: [:console, {LoggerFileBackend, :file}]
 
 config :logger, :file,
   path: "/var/log/weather_data.log",
