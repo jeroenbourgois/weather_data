@@ -10,4 +10,3 @@ config :logger, :file,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id],
   level: :debug
-

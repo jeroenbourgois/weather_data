@@ -19,24 +19,23 @@ defmodule WeatherData.Endpoint do
   # responsible for dispatching responses
   plug(:dispatch)
 
-
   get "/weatherstation/updateweatherstation.php" do
     Events.add_event(conn.params)
     send_resp(conn, 200, "Thanks")
   end
 
   get _ do
-    events = Events.get_last_events(10)
-    render(conn, "index.html", [events: events])
+    events = Events.get_last_events(20)
+    render(conn, "index.html", events: events)
   end
 
   defp render(%{status: status} = conn, template, assigns) do
     body =
-    @template_dir
-    |> Path.join(template)
-    |> String.replace_suffix(".html", ".html.eex")
-    |> EEx.eval_file(assigns)
+      @template_dir
+      |> Path.join(template)
+      |> String.replace_suffix(".html", ".html.eex")
+      |> EEx.eval_file(assigns)
 
-    send_resp(conn, (status || 200), body)
+    send_resp(conn, status || 200, body)
   end
 end

@@ -3,9 +3,9 @@ defmodule WeatherData.Events do
 
   alias WeatherData.Event
   alias WeatherData.Repo
-  
+
   def add_event(payload) when is_map(payload) do
-    payload = cleanup_uv(payload)  
+    payload = cleanup_uv(payload)
 
     %Event{}
     |> Event.changeset_new(payload)
@@ -24,6 +24,16 @@ defmodule WeatherData.Events do
     Event
     |> order_by(desc: :id)
     |> limit(^count)
+    |> Repo.all()
+  end
+
+  def getget() do
+    from(
+      e in Event,
+      select: %{indoortempf: avg(e.indoortempf), inserted_at: max(e.inserted_at)},
+      where: not is_nil(e.indoortempf),
+      group_by: e.inserted_at
+    )
     |> Repo.all()
   end
 end

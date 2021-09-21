@@ -11,3 +11,4 @@ erl_crash.dump
 /dist
 weather_data.db
 weather_data.db*
+.env

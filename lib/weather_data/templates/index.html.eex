@@ -1,6 +1,10 @@
+<% import WeatherData.ViewHelpers %>
 <!doctype>
 <html>
   <head>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
 <style>
 * {
   font-family: "Inconsolata", Menlo, Chicago, monospace;
@@ -39,6 +43,9 @@ thead { background: cyan }
 tr:odd { background: yellow }
 tr:even { background: cyan }
 
+.ct-chart {
+  background: white;
+}
 </style>
   </head>
   <body>
@@ -57,11 +64,11 @@ tr:even { background: cyan }
             <th>dewptf</th>
             <th>humidity</th>
             <th>humidity in</th>
-            <th>tempf in</th>
+            <th>°C INT</th>
             <th>rcpc</th>
             <th>rtfreq</th>
             <th>solarradiation</th>
-            <th>tempf</th>
+            <th>°C EXT</th>
             <th>winddir</th>
             <th>windgustmph</th>
             <th>windspeedmph</th>
@@ -77,11 +84,11 @@ tr:even { background: cyan }
             <td><%= event.dewptf %></td>
             <td><%= event.humidity %></td>
             <td><%= event.indoorhumidity %></td>
-            <td><%= event.indoortempf %></td>
+            <td><%= fahrenheit_to_celcius(event.indoortempf) %></td>
             <td><%= event.rainin %></td>
             <td><%= event.rtfreq %></td>
             <td><%= event.solarradiation %></td>
-            <td><%= event.tempf %></td>
+            <td><%= fahrenheit_to_celcius(event.tempf) %></td>
             <td><%= event.winddir %></td>
             <td><%= event.windgustmph %></td>
             <td><%= event.windspeedmph %></td>
@@ -91,5 +98,24 @@ tr:even { background: cyan }
         </tbody>
       </table>
     <% end %>
+
+    <h4>Last 7 days temp chart</h4>
+
+    <div class="ct-chart ct-perfect-fourth"></div>
+    <script>
+      var data = {
+        // A labels array that can contain any sort of values
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+          [5, 2, 4, 2, 0]
+        ]
+      };
+
+      // Create a new line chart object where as first parameter we pass in a selector
+      // that is resolving to our chart container element. The Second parameter
+      // is the actual data object.
+      new Chartist.Line('.ct-chart', data);
+    </script>
   </body>
 </html>
