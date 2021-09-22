@@ -26,7 +26,8 @@ defmodule WeatherData.Endpoint do
 
   get _ do
     events = Events.get_last_events(20)
-    render(conn, "index.html", events: events)
+    last_seven_days = Events.get_last_seven_days()
+    render(conn, "index.html", events: events, last_seven_days: last_seven_days)
   end
 
   defp render(%{status: status} = conn, template, assigns) do

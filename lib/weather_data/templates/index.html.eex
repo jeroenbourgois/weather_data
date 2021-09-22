@@ -104,11 +104,25 @@ tr:even { background: cyan }
     <div class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {
-        // A labels array that can contain any sort of values
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: [
+                <%= for event <- last_seven_days do %> 
+                  <%= "'#{event.inserted_at}'" %>,
+                <% end %>
+              ],
         // Our series array that contains series objects or in this case series data arrays
-        series: [
-          [5, 2, 4, 2, 0]
+              series: [
+                      [
+                <%= for event <- last_seven_days do %>
+                  <%= "#{Decimal.round(event.tempf) |> Decimal.to_string()}" %>,
+              <% end %>],
+                      [
+                <%= for event <- last_seven_days do %>
+                  <%= "#{Decimal.round(event.tempf_max) |> Decimal.to_string()}" %>,
+              <% end %>],
+                      [
+                <%= for event <- last_seven_days do %>
+                  <%= "#{Decimal.round(event.tempf_min) |> Decimal.to_string()}" %>,
+              <% end %>],
         ]
       };
 

@@ -27,12 +27,32 @@ defmodule WeatherData.Events do
     |> Repo.all()
   end
 
-  def getget() do
+  def get_last_seven_days() do
+    now = NaiveDateTime.utc_now()
+    last_week = NaiveDateTime.add(now, 60 * 60 * 24 * 7 * -1)
+
     from(
       e in Event,
-      select: %{indoortempf: avg(e.indoortempf), inserted_at: max(e.inserted_at)},
+      select: %{
+        indoortempf: avg(e.indoortempf),
+        indoortempf_max: max(e.indoortempf),
+        indoortempf_min: min(e.indoortempf),
+        tempf: avg(e.tempf),
+        tempf_max: max(e.tempf),
+        tempf_min: min(e.tempf),
+        baromin: avg(e.baromin),
+        uv: avg(e.uv),
+        humidity: avg(e.humidity),
+        humidity_max: max(e.humidity),
+        humidity_min: min(e.humidity),
+        rainin: avg(e.rainin),
+        rainin_max: max(e.rainin),
+        rainin_min: min(e.rainin),
+        inserted_at: fragment("MAX(DATE(?))", e.inserted_at)
+      },
       where: not is_nil(e.indoortempf),
-      group_by: e.inserted_at
+      where: fragment("DATE(?) BETWEEN DATE(?) AND DATE(?)", e.inserted_at, ^last_week, ^now),
+      group_by: fragment("DATE(?)", e.inserted_at)
     )
     |> Repo.all()
   end
