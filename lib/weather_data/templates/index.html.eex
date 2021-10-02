@@ -52,7 +52,7 @@ tr:even { background: cyan }
     <h1>Weather Data</h1>
     <h4>Last entries</h4>
     
-    <%= if events == [] do %>
+    <%= if assigns[:events] == [] do %>
       No events yet...
     <% else %>
       <table>
@@ -76,7 +76,7 @@ tr:even { background: cyan }
           </tr>
         </thead>
         <tbody>
-        <%= for event <- events do %>
+        <%= for event <- assigns[:events] do %>
           <tr>
             <td><%= event.id %></td>
             <td><%= event.baromin %></td>
@@ -105,22 +105,22 @@ tr:even { background: cyan }
     <script>
       var data = {
         labels: [
-                <%= for event <- last_seven_days do %> 
+                <%= for event <- assigns[:last_seven_days] do %> 
                   <%= "'#{event.inserted_at}'" %>,
                 <% end %>
               ],
         // Our series array that contains series objects or in this case series data arrays
               series: [
                       [
-                <%= for event <- last_seven_days do %>
+                <%= for event <- assigns[:last_seven_days] do %>
                   <%= "#{Decimal.round(event.tempf) |> Decimal.to_string()}" %>,
               <% end %>],
                       [
-                <%= for event <- last_seven_days do %>
+                <%= for event <- assigns[:last_seven_days] do %>
                   <%= "#{Decimal.round(event.tempf_max) |> Decimal.to_string()}" %>,
               <% end %>],
                       [
-                <%= for event <- last_seven_days do %>
+                <%= for event <- assigns[:last_seven_days] do %>
                   <%= "#{Decimal.round(event.tempf_min) |> Decimal.to_string()}" %>,
               <% end %>],
         ]

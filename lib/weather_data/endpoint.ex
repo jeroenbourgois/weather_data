@@ -1,4 +1,6 @@
 defmodule WeatherData.Endpoint do
+  require EEx
+
   @moduledoc """
   A Plug responsible for logging request info, parsing request body's as JSON,
   matching routes, and dispatching responses.
@@ -27,15 +29,17 @@ defmodule WeatherData.Endpoint do
   get _ do
     events = Events.get_last_events(20)
     last_seven_days = Events.get_last_seven_days()
-    render(conn, "index.html", events: events, last_seven_days: last_seven_days)
+    render(conn, :index, events: events, last_seven_days: last_seven_days)
   end
 
-  defp render(%{status: status} = conn, template, assigns) do
-    body =
-      @template_dir
-      |> Path.join(template)
-      |> String.replace_suffix(".html", ".html.eex")
-      |> EEx.eval_file(assigns)
+  EEx.function_from_file(:defp, :index, @template_dir <> "/index.html.eex", [:assigns])
+
+  defp render(%{status: status} = conn, :index, assigns) do
+    body = index(assigns)
+    # @template_dir
+    # |> Path.join(template)
+    # |> String.replace_suffix(".html", ".html.eex")
+    # |> EEx.eval_file(assigns)
 
     send_resp(conn, status || 200, body)
   end

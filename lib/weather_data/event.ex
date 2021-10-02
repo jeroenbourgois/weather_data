@@ -3,21 +3,21 @@ defmodule WeatherData.Event do
   import Ecto.Changeset
 
   schema "events" do
-    field :action,          :string
-    field :baromin,         :decimal
-    field :uv,              :decimal
-    field :dewptf,          :decimal
-    field :humidity,        :integer
-    field :indoorhumidity,  :integer
-    field :indoortempf,     :decimal
-    field :rainin,          :decimal
-    field :realtime,        :integer
-    field :rtfreq,          :integer
-    field :solarradiation,  :decimal
-    field :tempf,           :decimal
-    field :winddir,         :decimal
-    field :windgustmph,     :decimal
-    field :windspeedmph,    :decimal
+    field(:action, :string)
+    field(:baromin, :decimal)
+    field(:uv, :decimal)
+    field(:dewptf, :decimal)
+    field(:humidity, :integer)
+    field(:indoorhumidity, :integer)
+    field(:indoortempf, :decimal)
+    field(:rainin, :decimal)
+    field(:realtime, :integer)
+    field(:rtfreq, :integer)
+    field(:solarradiation, :decimal)
+    field(:tempf, :decimal)
+    field(:winddir, :decimal)
+    field(:windgustmph, :decimal)
+    field(:windspeedmph, :decimal)
     # field :prcp,    :float, default: 0.0
 
     timestamps()
