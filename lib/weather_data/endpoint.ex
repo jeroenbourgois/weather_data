@@ -22,6 +22,7 @@ defmodule WeatherData.Endpoint do
   plug(:dispatch)
 
   get "/weatherstation/updateweatherstation.php" do
+    Logger.info("Received data")
     Events.add_event(conn.params)
     send_resp(conn, 200, "Thanks")
   end
