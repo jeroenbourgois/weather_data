@@ -9,5 +9,4 @@ config :logger,
     "$date MIX_ENV=prod sudo /opt/app/weather_data/_build/prod/rel/weather_data/bin/weather_data start$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
-config :logger, :file,
-  path: "/var/log/weather_data.log",
+config :logger, :file, path: "/var/log/weather_data.log"
