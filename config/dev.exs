@@ -6,5 +6,5 @@ config :logger,
   backends: [:console]
 
 config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
+  format: "$date $time $metadata[$level] $message\n",
   level: :debug
