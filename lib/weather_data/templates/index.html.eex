@@ -45,6 +45,7 @@ tr:even { background: cyan }
 
 .ct-chart {
   background: white;
+  width: 100%;
 }
 </style>
   </head>
