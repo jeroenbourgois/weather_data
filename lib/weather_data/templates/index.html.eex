@@ -42,6 +42,7 @@ thead { border: 14pt double(1,12,1) }
 thead { background: cyan }
 tr:odd { background: yellow }
 tr:even { background: cyan }
+th { white-space: nowrap; }
 
 .ct-chart {
   background: white;
@@ -51,54 +52,6 @@ tr:even { background: cyan }
   </head>
   <body>
     <h1>Weather Data</h1>
-    <h4>Last entries</h4>
-    
-    <%= if assigns[:events] == [] do %>
-      No events yet...
-    <% else %>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>baromin</th>
-            <th>uv</th>
-            <th>dewptf</th>
-            <th>humidity</th>
-            <th>humidity in</th>
-            <th>°C INT</th>
-            <th>rcpc</th>
-            <th>rtfreq</th>
-            <th>solarradiation</th>
-            <th>°C EXT</th>
-            <th>winddir</th>
-            <th>windgustmph</th>
-            <th>windspeedmph</th>
-            <th>date</th>
-          </tr>
-        </thead>
-        <tbody>
-        <%= for event <- assigns[:events] do %>
-          <tr>
-            <td><%= event.id %></td>
-            <td><%= event.baromin %></td>
-            <td><%= event.uv %></td>
-            <td><%= event.dewptf %></td>
-            <td><%= event.humidity %></td>
-            <td><%= event.indoorhumidity %></td>
-            <td><%= fahrenheit_to_celcius(event.indoortempf) %></td>
-            <td><%= event.rainin %></td>
-            <td><%= event.rtfreq %></td>
-            <td><%= event.solarradiation %></td>
-            <td><%= fahrenheit_to_celcius(event.tempf) %></td>
-            <td><%= event.winddir %></td>
-            <td><%= event.windgustmph %></td>
-            <td><%= event.windspeedmph %></td>
-            <td style="white-space: nowrap"><%= event.inserted_at %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    <% end %>
 
     <h4>Last 7 days temp chart</h4>
 
@@ -132,5 +85,55 @@ tr:even { background: cyan }
       // is the actual data object.
       new Chartist.Line('.ct-chart', data);
     </script>
+
+    <h4>Last entries</h4>
+    
+    <%= if assigns[:events] == [] do %>
+      No events yet...
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>baromin</th>
+            <th>uv</th>
+            <th>dewptf</th>
+            <th>hum</th>
+            <th>hum in</th>
+            <th>°C INT</th>
+            <th>rcpc</th>
+            <th>rtfreq</th>
+            <th>solarradiation</th>
+            <th>°C EXT</th>
+            <th>wind D</th>
+            <th>wind G</th>
+            <th>wind S</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= for event <- assigns[:events] do %>
+          <tr>
+            <td><%= event.id %></td>
+            <td><%= event.baromin %></td>
+            <td><%= event.uv %></td>
+            <td><%= event.dewptf %></td>
+            <td><%= event.humidity %></td>
+            <td><%= event.indoorhumidity %></td>
+            <td><%= fahrenheit_to_celcius(event.indoortempf) %></td>
+            <td><%= event.rainin %></td>
+            <td><%= event.rtfreq %></td>
+            <td><%= event.solarradiation %></td>
+            <td><%= fahrenheit_to_celcius(event.tempf) %></td>
+            <td><%= event.winddir %></td>
+            <td><%= mph_to_kph(event.windgustmph) %></td>
+            <td><%= mph_to_kph(event.windspeedmph) %></td>
+            <td style="white-space: nowrap"><%= event.inserted_at %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
   </body>
 </html>

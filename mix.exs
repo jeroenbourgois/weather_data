@@ -4,7 +4,7 @@ defmodule WeatherData.MixProject do
   def project do
     [
       app: :weather_data,
-      version: "2110.3.0",
+      version: "2110.4.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps()

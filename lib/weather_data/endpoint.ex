@@ -27,7 +27,7 @@ defmodule WeatherData.Endpoint do
   end
 
   get _ do
-    events = Events.get_last_events(20)
+    events = Events.get_last_events(50)
     last_seven_days = Events.get_last_seven_days()
     render(conn, :index, events: events, last_seven_days: last_seven_days)
   end
