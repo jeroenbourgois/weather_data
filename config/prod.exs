@@ -9,3 +9,5 @@ config :logger,
   metadata: [:user_id]
 
 config :logger, :file, path: "/var/log/weather_data.log"
+
+config :weather_data, WeatherData.Repo, database: System.fetch_env!("DB")

@@ -53,9 +53,8 @@ th { white-space: nowrap; }
   <body>
     <h1>Weather Data</h1>
 
-    <h4>Last 7 days temp chart</h4>
-
-    <div class="ct-chart ct-perfect-fourth"></div>
+    <h4>Last 7 days temp chart (avg / min / max)</h4>
+    <div id="chart-temp" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {
         labels: [
@@ -83,7 +82,39 @@ th { white-space: nowrap; }
       // Create a new line chart object where as first parameter we pass in a selector
       // that is resolving to our chart container element. The Second parameter
       // is the actual data object.
-      new Chartist.Line('.ct-chart', data);
+      new Chartist.Line('#chart-temp', data);
+    </script>
+
+    <h4>Last 7 days temp chart</h4>
+    <div id="chart-temp-b" class="ct-chart ct-perfect-fourth"></div>
+    <script>
+      var data = {
+        labels: [
+                <%= for event <- assigns[:last_seven_days] do %> 
+                  <%= "'#{event.inserted_at}'" %>,
+                <% end %>
+              ],
+        // Our series array that contains series objects or in this case series data arrays
+              series: [
+                      [
+                <%= for event <- assigns[:last_seven_days] do %>
+                                <%= "#{event.tempf |> fahrenheit_to_celcius() |> Decimal.to_string()}" %>,
+              <% end %>],
+                      [
+                <%= for event <- assigns[:last_seven_days] do %>
+                                <%= "#{event.tempf_max |> fahrenheit_to_celcius() |> Decimal.to_string()}" %>,
+              <% end %>],
+                      [
+                <%= for event <- assigns[:last_seven_days] do %>
+                  <%= "#{event.tempf_min |> fahrenheit_to_celcius() |> Decimal.to_string()}" %>,
+              <% end %>],
+        ]
+      };
+
+      // Create a new line chart object where as first parameter we pass in a selector
+      // that is resolving to our chart container element. The Second parameter
+      // is the actual data object.
+      new Chartist.Line('#chart-temp-b', data);
     </script>
 
     <h4>Last entries</h4>
@@ -91,13 +122,14 @@ th { white-space: nowrap; }
     <%= if assigns[:events] == [] do %>
       No events yet...
     <% else %>
+      D = direction, G = gust, S = speed
       <table>
         <thead>
           <tr>
             <th>#</th>
             <th>baromin</th>
             <th>uv</th>
-            <th>dewptf</th>
+            <th>dewpt</th>
             <th>hum</th>
             <th>hum in</th>
             <th>°C INT</th>
@@ -117,7 +149,7 @@ th { white-space: nowrap; }
             <td><%= event.id %></td>
             <td><%= event.baromin %></td>
             <td><%= event.uv %></td>
-            <td><%= event.dewptf %></td>
+            <td><%= fahrenheit_to_celcius(event.dewptf) %></td>
             <td><%= event.humidity %></td>
             <td><%= event.indoorhumidity %></td>
             <td><%= fahrenheit_to_celcius(event.indoortempf) %></td>

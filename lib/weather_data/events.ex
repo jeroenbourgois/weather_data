@@ -20,13 +20,15 @@ defmodule WeatherData.Events do
 
   defp cleanup_uv(payload), do: payload
 
-  def get_last_events(count) do
+  @spec get_last_events(integer) :: [Event.t()]
+  def get_last_events(count) when is_integer(count) do
     Event
     |> order_by(desc: :id)
     |> limit(^count)
     |> Repo.all()
   end
 
+  @spec get_last_seven_days() :: [Event.t()]
   def get_last_seven_days() do
     now = NaiveDateTime.utc_now()
     last_week = NaiveDateTime.add(now, 60 * 60 * 24 * 7 * -1)

@@ -5,7 +5,6 @@ use Mix.Config
 config :weather_data,
   ecto_repos: [WeatherData.Repo]
 
-config :weather_data, WeatherData.Repo,
-  database: System.fetch_env!("DB")
+config :weather_data, WeatherData.Repo, database: System.get_env("DB") || "weather_data.db"
 
 import_config "#{Mix.env()}.exs"

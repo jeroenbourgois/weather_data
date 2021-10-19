@@ -4,9 +4,13 @@ defmodule WeatherData.MixProject do
   def project do
     [
       app: :weather_data,
-      version: "2110.4.0",
+      version: "2110.5.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        ignore_warnings: ".dialyzer_ignore.exs"
+      ],
       deps: deps()
     ]
   end
@@ -26,7 +30,8 @@ defmodule WeatherData.MixProject do
       {:jason, "~> 1.0"},
       {:ecto_sql, "~> 3.0"},
       {:ecto_sqlite3, "~> 0.7.0"},
-      {:logger_file_backend, "~> 0.0.10"}
+      {:logger_file_backend, "~> 0.0.10"},
+      {:dialyxir, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 end

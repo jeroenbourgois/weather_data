@@ -2,6 +2,26 @@ defmodule WeatherData.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+          action: String.t(),
+          baromin: Decimal.t(),
+          uv: Decimal.t(),
+          dewptf: Decimal.t(),
+          humidity: integer,
+          indoorhumidity: integer,
+          indoortempf: Decimal.t(),
+          rainin: Decimal.t(),
+          realtime: integer,
+          rtfreq: integer,
+          solarradiation: Decimal.t(),
+          tempf: Decimal.t(),
+          winddir: Decimal.t(),
+          windgustmph: Decimal.t(),
+          windspeedmph: Decimal.t(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
+
   schema "events" do
     field(:action, :string)
     field(:baromin, :decimal)
