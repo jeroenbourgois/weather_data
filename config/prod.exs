@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :weather_data, port: 80
 
