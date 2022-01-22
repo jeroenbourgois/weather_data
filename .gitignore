@@ -12,4 +12,5 @@ erl_crash.dump
 weather_data.db
 weather_data.db*
 .env
+.env.dev
 priv/plts

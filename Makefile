@@ -1,5 +1,5 @@
 run:
-	source ./.env && iex -S mix run --no-halt
+	source ./.env.dev && iex -S mix run --no-halt
 
 build:
-	source ./.env && ./script/build
+	DB=/var/weather_data/weather_data.db ./script/build
