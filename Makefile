@@ -1,5 +1,5 @@
 run:
-	source .env && iex -S mix run --no-halt
+	source ./.env && iex -S mix run --no-halt
 
 build:
-	source .env && ./script/build
+	source ./.env && ./script/build
