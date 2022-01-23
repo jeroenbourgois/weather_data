@@ -1,0 +1,15 @@
+#!/bin/sh
+# Sync project to pi, to build it there
+rsync -zavh \
+  --exclude="deps" \
+  --exclude=".gitignore" \
+  --exclude="_build" \
+  --exclude=".elixir_ls" \
+  --exclude=".env" \
+  --exclude=".env.dev" \
+  --exclude="mix.lock" \
+  --exclude=".git" \
+  --exclude=".gitignore" \
+  --exclude=".tool-versions" \
+  --exclude=".dialyzer_ignore.exs" \
+  . pi@192.168.0.208:/home/pi/weather_data
