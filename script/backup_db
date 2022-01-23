@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 date=$(printf '%(%Y-%m-%d)T%s' -1)
 time=$(printf '%(%H-%M-%S)T%s' -1)
