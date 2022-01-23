@@ -1,6 +1,6 @@
 #!/bin/sh
 # Sync project to pi, to build it there
-rsync -zavh \
+rsync -avh \
   --exclude="deps" \
   --exclude=".gitignore" \
   --exclude="_build" \
