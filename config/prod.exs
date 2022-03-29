@@ -1,7 +1,5 @@
 import Config
 
-config :weather_data, port: 4000
-
 config :logger,
   backends: [:console, {LoggerFileBackend, :file}],
   level: :info,

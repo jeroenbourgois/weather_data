@@ -3,7 +3,8 @@
 import Config
 
 config :weather_data,
-  ecto_repos: [WeatherData.Repo]
+  ecto_repos: [WeatherData.Repo],
+  port: System.get_env("PORT") || 4000
 
 config :weather_data, WeatherData.Repo, database: System.get_env("DB") || "weather_data.db"
 

@@ -26,10 +26,15 @@ defmodule WeatherData.Endpoint do
     send_resp(conn, 200, "Thanks")
   end
 
-  get _ do
+  get "/" do
     events = Events.get_last_events(50)
     last_seven_days = Events.get_last_seven_days()
     render(conn, :index, events: events, last_seven_days: last_seven_days)
+  end
+
+  match _ do
+    Logger.info("[INCOMING] - #{inspect(conn)}")
+    send_resp(conn, 404, "Page not found")
   end
 
   EEx.function_from_file(:defp, :index, @template_dir <> "/index.html.eex", [:assigns])
