@@ -1,7 +1,7 @@
-run:
-	source ./.env.dev && iex -S mix run --no-halt
+.SILENT: ;               # no need for @
 
 release: build
 
 build:
-	DB=/home/pi/weather_data/weather_data.db PORT=80 ./script/build
+	echo "Compiling for the Pi"
+	GOOS=linux GOARCH=arm go build -o bin/weatherd-arm main.go
