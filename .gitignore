@@ -3,3 +3,4 @@ weather_data.log
 gin.log
 weather_data
 weather_data.db
+entries.csv
